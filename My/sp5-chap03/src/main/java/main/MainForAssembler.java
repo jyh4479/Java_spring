@@ -31,6 +31,12 @@ public class MainForAssembler {
 				processChangeCommand(command.split(" "));
 				continue;
 			}
+			//내가 작성하는 조회 기능
+			else if (command.startsWith("view")) {
+				//여기에 구현
+				System.out.println("아직 미구현.");
+				continue;
+			}
 			printHelp();
 		}
 	}
