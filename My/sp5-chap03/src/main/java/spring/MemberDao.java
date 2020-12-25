@@ -26,4 +26,9 @@ public class MemberDao {
 	public Collection<Member> selectAll() {
 		return map.values();
 	}
+	
+	///////////////////////////////////////////
+	public Map<String, Member> getAll(){
+		return map;
+	}
 }

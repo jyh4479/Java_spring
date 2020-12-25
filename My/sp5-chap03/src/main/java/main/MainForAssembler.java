@@ -11,6 +11,8 @@ import spring.MemberNotFoundException;
 import spring.MemberRegisterService;
 import spring.RegisterRequest;
 import spring.WrongIdPasswordException;
+/////////////////////////////////////////
+import spring.MemberViewService;
 
 public class MainForAssembler {
 
@@ -33,8 +35,8 @@ public class MainForAssembler {
 			}
 			//내가 작성하는 조회 기능
 			else if (command.startsWith("view")) {
-				//여기에 구현
-				System.out.println("아직 미구현.");
+				//여기에 구현				
+				processViewCommand();
 				continue;
 			}
 			printHelp();
@@ -42,6 +44,10 @@ public class MainForAssembler {
 	}
 
 	private static Assembler assembler = new Assembler();
+	private static void processViewCommand() {
+		MemberViewService req = assembler.getMemberViewService();
+		req.view_all();
+	}
 
 	private static void processNewCommand(String[] arg) {
 		if (arg.length != 5) {
