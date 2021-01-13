@@ -1,5 +1,6 @@
 package config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,40 +13,34 @@ import spring.MemberRegisterService;
 import spring.VersionPrinter;
 
 @Configuration
-public class AppCtx {
-
-	@Bean
-	public MemberDao memberDao() {
-		return new MemberDao();
-	}
+public class AppConf2 {
+	@Autowired
+	private MemberDao memberDao; //@Autowired는 생성자를 불러오는건가?
+	@Autowired
+	private MemberPrinter memberPrinter;
 	
 	@Bean
 	public MemberRegisterService memberRegSvc() {
-		return new MemberRegisterService(memberDao());
+		return new MemberRegisterService(memberDao);
 	}
 	
 	@Bean
 	public ChangePasswordService changePwdSvc() {
 		ChangePasswordService pwdSvc = new ChangePasswordService();
-		pwdSvc.setMemberDao(memberDao());
+		pwdSvc.setMemberDao(memberDao);
 		return pwdSvc;
 	}
 	
 	@Bean
-	public MemberPrinter memberPrinter() {
-		return new MemberPrinter();
-	}
-	
-	@Bean
 	public MemberListPrinter listPrinter() {
-		return new MemberListPrinter(memberDao(), memberPrinter());
+		return new MemberListPrinter(memberDao, memberPrinter);
 	}
 	
 	@Bean
 	public MemberInfoPrinter infoPrinter() {
 		MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
-		infoPrinter.setMemberDao(memberDao());
-		infoPrinter.setPrinter(memberPrinter());
+		infoPrinter.setMemberDao(memberDao);
+		infoPrinter.setPrinter(memberPrinter);
 		return infoPrinter;
 	}
 	
@@ -57,7 +52,3 @@ public class AppCtx {
 		return versionPrinter;
 	}
 }
-
-//어셈블러랑 비교시 memberDao라는 객체가 하나로 동작하는것인지 memberDao()콜 할시 계속 새로운 객체가 생성되는 것인지?
-//--> 개인적인 생각으로는 bean으로 생성되는 memberDao의 index변수를 확인해봐야함 (책 91쪽에 궁금증에 관련한 문제 다룸)
-//--> 싱글톤 객체
