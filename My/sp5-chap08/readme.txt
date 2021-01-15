@@ -1,0 +1,1 @@
+https://kogle.tistory.com/87 --> 참고하여 데베 연결 해결함 (이유도 알아보기)
