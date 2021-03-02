@@ -12,9 +12,9 @@ public class myRoutes {
     public RouteLocator myRoute(RouteLocatorBuilder builder){
         return builder.routes()
                 .route(p->p
-                .path("/service/A").uri("http://localhost:8081/service/A"))
+                .path("/service/up").uri("http://localhost:8081/service/up"))
                 .route(p->p
-                .path("/service/B").uri("http://localhost:8082/service/B"))
+                .path("/service/down").uri("http://localhost:8082/service/down"))
                 .build();
     }
 }
